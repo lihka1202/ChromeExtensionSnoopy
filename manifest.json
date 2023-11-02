@@ -3,7 +3,7 @@
     "name" : "Snoopy",
     "version" : "1.0",
     "description" : "tracks the webpages that you have visited",
-    "permissions" : ["storage", "activeTab"],
+    "permissions" : ["storage", "activeTab", "tabs"],
     "icons" : {
         "16" : "snoopy.png",
         "48" : "snoopy.png",
@@ -20,6 +20,12 @@
     },
     "background" : {
         "service_worker" : "background.js"
-    }
+    },
+    "content_scripts" : [
+        {
+            "js" : ["contentScripts.js"],
+            "matches": ["<all_urls>"]
+        }
+    ]
 
 }
