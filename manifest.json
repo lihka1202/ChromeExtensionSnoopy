@@ -1,0 +1,25 @@
+{
+    "manifest_version" : 3,
+    "name" : "Snoopy",
+    "version" : "1.0",
+    "description" : "tracks the webpages that you have visited",
+    "permissions" : ["storage", "activeTab"],
+    "icons" : {
+        "16" : "snoopy.png",
+        "48" : "snoopy.png",
+        "128" : "snoopy.png"
+    },
+    "action" : {
+        "default_icon" : {
+            "16" : "snoopy.png",
+            "24" : "snoopy.png",
+            "32" : "snoopy.png"
+        },
+        "default_popup" : "popup.html",
+        "default_title" : "Snoopy"
+    },
+    "background" : {
+        "service_worker" : "background.js"
+    }
+
+}
