@@ -15,7 +15,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         if(chrome.runtime.error) {
           console.log("Error has occured")
         } else  {
-          const websites_local = res.websites || []
+          const websites_local = res.website || []
           const table_local = res.table || []
 
 
