@@ -3,7 +3,7 @@
     "name" : "Snoopy",
     "version" : "1.0",
     "description" : "tracks the webpages that you have visited",
-    "permissions" : ["storage", "activeTab", "tabs"],
+    "permissions" : ["storage", "activeTab", "tabs", "scripting"],
     "icons" : {
         "16" : "snoopy.png",
         "48" : "snoopy.png",
