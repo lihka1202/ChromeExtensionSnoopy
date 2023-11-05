@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Display Data</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hehexd</h1>
+    <h1>Data Display</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Website</th>
+                <th>Hyperlink</th>
+                <th>Occurrence</th>
+            </tr>
+        </thead>
+        <tbody id="data-body">
+        </tbody>
+    </table>
+
+    <script src="display.js"></script>
 </body>
-<script src="display.js"></script>
 </html>
