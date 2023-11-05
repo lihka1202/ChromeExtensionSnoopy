@@ -2,6 +2,9 @@
 //Get the data from the popup.html
 const urlHolder = document.getElementById("url")
 
+const websiteCounter = document.getElementById("website-counter")
+const hyoerlinkCounter = document.getElementById("hyperlink-counter")
+
 
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
   if (tabs.length > 0) {
@@ -10,13 +13,14 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       console.log("Current URL: " + currentURL)
 
 
-      chrome.storage.local.get(["website", "table"],
+      chrome.storage.local.get(["website", "table", "hyperlink"],
       (res) => {
         if(chrome.runtime.error) {
           console.log("Error has occured")
         } else  {
           const websites_local = res.website || []
           const table_local = res.table || []
+          const hyperlinks_local = res.hyperlink
 
 
           // Check if the website exists in array already
@@ -46,6 +50,11 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
             console.log("table array has been set in the chrome storage")
             console.log(table_local)
             console.log(websites_local)
+
+            // Add the data to the webpage
+            websiteCounter.textContent = `The number of websites visited: ${websites_local.length}`
+            hyoerlinkCounter.textContent = `The number of hyperlinks encountered: ${hyperlinks_local.length}`
+
           })
 
         }
@@ -56,4 +65,14 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       
   }
 });
+
+chrome.storage.onChanged.addListener(function(changes, areaName) {
+  if(changes.website) {
+    websiteCounter.textContent = `The number of websites visited: ${changes.website.newValue.length}`
+  } else if(changes.hyperlink) {
+    hyoerlinkCounter.textContent = `The number of hyperlinks encountered: ${changes.hyperlink.newValue.length}`
+  }
+})
+
+
 
