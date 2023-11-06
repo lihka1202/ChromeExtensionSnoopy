@@ -1,9 +1,3 @@
-// chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-//     if (message.url) {
-//         // Handle the message from background.js
-//         console.log(message.url);
-//     }
-// });
 let currentURL = ""
 chrome.storage.onChanged.addListener(function(changes, areaName) { //changes --> Key, areaname --> type of storage
     for (const key in changes) {
@@ -47,12 +41,12 @@ function trackHyperlinks() {
                 
                 for(const link of linkData) {
                     const foundObject = table_local.find(obj => obj.website === res.currentURL);
-                    if(foundObject) {
+                    if(foundObject && link!="") {
                         //TODO: Convert from link to an object
                         const ObjectFinder = foundObject.hyperlinks.find(ob => ob.hyperlink === link)
                         if(ObjectFinder) {
 
-                            // Object Exists, now you can incremenet the hyperlink
+                            // Object Exists, now you can increment the hyperlink
                             ObjectFinder.occurence += 1
 
                         } else {
@@ -70,7 +64,7 @@ function trackHyperlinks() {
 
                     console.log("Table Logged: ", table_local)
 
-                    if(hyperlink_local.includes(link)===false)  {
+                    if(hyperlink_local.includes(link)===false && link!="")  {
                         hyperlink_local.push(link)
                         console.log("Hyperlink added to the hyperlink list")
                     } 
@@ -93,7 +87,4 @@ function trackHyperlinks() {
   }
   
 
-  
 
-
-console.log(currentURL)

@@ -1,3 +1,4 @@
+let curerntURL = ""
 chrome.storage.local.get(
     ["table"],
     (res) => {
@@ -13,11 +14,24 @@ chrome.storage.local.get(
                         const websiteCell = document.createElement('td');
                         const hyperlinkCell = document.createElement('td');
                         const occurrenceCell = document.createElement('td');
-            
-                        websiteCell.textContent = entry.website;
-                        hyperlinkCell.textContent = link.hyperlink;
+                       
+                        const websiteLink = document.createElement('a');
+                        if(curerntURL != entry.website) {
+                            websiteLink.textContent = new URL(entry.website).hostname;
+                            curerntURL = entry.website
+                        } else {
+                            websiteLink.textContent = ""
+                        }
+                        websiteLink.href = entry.website;                     
+                        websiteCell.appendChild(websiteLink);
+
+                        const hyperlinkLink = document.createElement('a');
+                        hyperlinkLink.href = link.hyperlink;
+                        hyperlinkLink.textContent = link.hyperlink;
+                        hyperlinkCell.appendChild(hyperlinkLink);
+
                         occurrenceCell.textContent = link.occurence;
-            
+                        
                         row.appendChild(websiteCell);
                         row.appendChild(hyperlinkCell);
                         row.appendChild(occurrenceCell);
@@ -32,28 +46,3 @@ chrome.storage.local.get(
     }
 )
 
-// // Function to populate the table
-// function populateTable() {
-//     const dataBody = document.getElementById('data-body');
-//     data.forEach((entry) => {
-//         entry.hyperlinks.forEach((link) => {
-//             const row = document.createElement('tr');
-//             const websiteCell = document.createElement('td');
-//             const hyperlinkCell = document.createElement('td');
-//             const occurrenceCell = document.createElement('td');
-
-//             websiteCell.textContent = entry.website;
-//             hyperlinkCell.textContent = link.hyperlink;
-//             occurrenceCell.textContent = link.occurrence;
-
-//             row.appendChild(websiteCell);
-//             row.appendChild(hyperlinkCell);
-//             row.appendChild(occurrenceCell);
-
-//             dataBody.appendChild(row);
-//         });
-//     });
-// }
-
-// // Call the function to populate the table
-// populateTable();
